@@ -7,9 +7,6 @@
     <body>
         <script>
 
-            let humanScore = 0;
-            let computerScore = 0;
-
             console.log("Hello World!");
             function getComputerChoice() {
                 let decisionNum = Math.floor(Math.random() * 3); // 0 is rock, 1 is paper, 2 is scissors
@@ -38,36 +35,56 @@
                 }
             }
 
-            function playRound(humanChoice, computerChoice) {
-                humanChoice = getHumanChoice();
-                computerChoice = getComputerChoice();
+            function playGame() {
+                let humanScore = 0;
+                let computerScore = 0;
+                function playRound(humanChoice, computerChoice) {
+                    humanChoice = getHumanChoice();
+                    computerChoice = getComputerChoice();
 
-                if (humanChoice === 'rock' && computerChoice === 'scissors') {
-                    humanScore++;
-                    return 'You win! Rock beats scissors!';
+                    if (humanChoice === 'rock' && computerChoice === 'scissors') {
+                        humanScore++;
+                        return 'You win! Rock beats scissors!';
+                    }
+                    else if (humanChoice === 'rock' && computerChoice === 'paper') {
+                        computerScore++;
+                        return 'You lose! Rock loses to paper.';
+                    }
+                    else if (humanChoice === 'paper' && computerChoice === 'rock') {
+                        humanScore++;
+                        return 'You win! Paper beats rock.';
+                    }
+                    else if (humanChoice === 'paper' && computerChoice === 'scissors') {
+                        computerScore++;
+                        return 'You lose! Paper loses to scissors.';
+                    }
+                    else if (humanChoice === 'scissors' && computerChoice === 'rock') {
+                        computerScore++;
+                        return 'You lose! Scissors loses to rock';
+                    }
+                    else if (humanChoice === 'scissors' && computerChoice === 'paper') {
+                        humanScore++;
+                        return 'You win! Scissors beats paper.';
+                    }
+                    else if (humanChoice === computerChoice) {
+                        return 'Tie!';
+                    }
                 }
-                else if (humanChoice === 'rock' && computerChoice === 'paper') {
-                    computerScore++;
-                    return 'You lose! Rock loses to paper.';
+
+                playRound();
+                playRound();
+                playRound();
+                playRound();
+                playRound();
+
+                if (humanScore > computerScore) {
+                    return 'You win!' + ` Human score: ${humanScore}, Computer score: ${computerScore}`;
                 }
-                else if (humanChoice === 'paper' && computerChoice === 'rock') {
-                    humanScore++;
-                    return 'You win! Paper beats rock.';
+                else if (computerScore > humanScore) {
+                    return 'You lose!' + ` Human score: ${humanScore}, Computer score: ${computerScore}`;
                 }
-                else if (humanChoice === 'paper' && computerChoice === 'scissors') {
-                    computerScore++;
-                    return 'You lose! Paper loses to scissors.';
-                }
-                else if (humanChoice === 'scissors' && computerChoice === 'rock') {
-                    computerScore++;
-                    return 'You lose! Scissors loses to rock';
-                }
-                else if (humanChoice === 'scissors' && computerChoice === 'paper') {
-                    humanScore++;
-                    return 'You win! Scissors beats paper.';
-                }
-                else if (humanChoice === computerChoice) {
-                    return 'Tie!';
+                else {
+                    return 'Tie!' + ` Human score: ${humanScore}, Computer score: ${computerScore}`;
                 }
             }
         </script>
