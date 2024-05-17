@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Odin Rock Paper Scissors</title>
+    </head>
+    <body>
+        <script>
+
+            let humanScore = 0;
+            let computerScore = 0;
+
+            console.log("Hello World!");
+            function getComputerChoice() {
+                let decisionNum = Math.floor(Math.random() * 3); // 0 is rock, 1 is paper, 2 is scissors
+                switch (decisionNum) {
+                    case (0):
+                        return 'rock';
+                        break;
+                    case (1):
+                        return 'paper';
+                        break;
+                    case (2):
+                        return 'scissors';
+                        break;
+                }
+            }
+
+            function getHumanChoice() {
+                while (true) {
+                    let decision = prompt("Enter your choice (rock, paper, or scissors)").toLowerCase();
+                    if (decision === 'rock' || decision === 'paper' || decision === 'scissors') {
+                        return decision;
+                    }
+                    else {
+                        alert("Please enter a valid option.");
+                    }
+                }
+            }
+
+            function playRound(humanChoice, computerChoice) {
+                humanChoice = getHumanChoice();
+                computerChoice = getComputerChoice();
+
+                if (humanChoice === 'rock' && computerChoice === 'scissors') {
+                    humanScore++;
+                    return 'You win! Rock beats scissors!';
+                }
+                else if (humanChoice === 'rock' && computerChoice === 'paper') {
+                    computerScore++;
+                    return 'You lose! Rock loses to paper.';
+                }
+                else if (humanChoice === 'paper' && computerChoice === 'rock') {
+                    humanScore++;
+                    return 'You win! Paper beats rock.';
+                }
+                else if (humanChoice === 'paper' && computerChoice === 'scissors') {
+                    computerScore++;
+                    return 'You lose! Paper loses to scissors.';
+                }
+                else if (humanChoice === 'scissors' && computerChoice === 'rock') {
+                    computerScore++;
+                    return 'You lose! Scissors loses to rock';
+                }
+                else if (humanChoice === 'scissors' && computerChoice === 'paper') {
+                    humanScore++;
+                    return 'You win! Scissors beats paper.';
+                }
+                else if (humanChoice === computerChoice) {
+                    return 'Tie!';
+                }
+            }
+        </script>
+    </body>
+</html>
