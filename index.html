@@ -2,12 +2,45 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
         <title>Odin Rock Paper Scissors</title>
     </head>
     <body>
+        <h1>Odin Project: Rock Paper Scissors</h1>
+        <div class="buttonContainer">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+        <div class="separator"></div>
+        <div class="scoreboard"></div>
         <script>
 
+            let humanScore = 0;
+            let computerScore = 0;
+
             console.log("Hello World!");
+
+            let buttonContainer = document.querySelector(".buttonContainer");
+            let scoreboardContainer = document.querySelector(".scoreboard");
+
+            buttonContainer.addEventListener("click", function (event) {
+                playRound(event.target.id, getComputerChoice());
+                if (humanScore >= 5) {
+                    scoreboardContainer.textContent = `YOU WIN!`;
+                    humanScore = 0;
+                    computerScore = 0;
+                }
+                else if (computerScore >= 5) {
+                    scoreboardContainer.textContent = `YOU LOSE!`;
+                    humanScore = 0;
+                    computerScore = 0;
+                }
+                else {
+                    scoreboardContainer.textContent = `Human Score: ${humanScore} | Computer Score: ${computerScore}`;
+                }
+            })
+
             function getComputerChoice() {
                 let decisionNum = Math.floor(Math.random() * 3); // 0 is rock, 1 is paper, 2 is scissors
                 switch (decisionNum) {
@@ -35,6 +68,40 @@
                 }
             }
 
+            function playRound(humanChoice, computerChoice) {
+                // humanChoice = getHumanChoice();
+                // computerChoice = getComputerChoice();
+
+                if (humanChoice === 'rock' && computerChoice === 'scissors') {
+                    humanScore++;
+                    return 'You win! Rock beats scissors!';
+                }
+                else if (humanChoice === 'rock' && computerChoice === 'paper') {
+                    computerScore++;
+                    return 'You lose! Rock loses to paper.';
+                }
+                else if (humanChoice === 'paper' && computerChoice === 'rock') {
+                    humanScore++;
+                    return 'You win! Paper beats rock.';
+                }
+                else if (humanChoice === 'paper' && computerChoice === 'scissors') {
+                    computerScore++;
+                    return 'You lose! Paper loses to scissors.';
+                }
+                else if (humanChoice === 'scissors' && computerChoice === 'rock') {
+                    computerScore++;
+                    return 'You lose! Scissors loses to rock';
+                }
+                else if (humanChoice === 'scissors' && computerChoice === 'paper') {
+                    humanScore++;
+                    return 'You win! Scissors beats paper.';
+                }
+                else if (humanChoice === computerChoice) {
+                    return 'Tie!';
+                }
+            }
+
+            /*
             function playGame() {
                 let humanScore = 0;
                 let computerScore = 0;
@@ -87,6 +154,8 @@
                     return 'Tie!' + ` Human score: ${humanScore}, Computer score: ${computerScore}`;
                 }
             }
+
+            */
         </script>
     </body>
 </html>
